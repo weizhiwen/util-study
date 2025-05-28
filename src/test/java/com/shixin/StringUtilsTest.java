@@ -42,6 +42,27 @@ public class StringUtilsTest {
     }
 
     @Test
+    public void test_substringBefore() {
+        String str = "key=value";
+        Assertions.assertEquals("key", StringUtils.substringBefore(str, "="));
+        Assertions.assertNull(StringUtils.substringBefore(null, "="));
+    }
+
+    @Test
+    public void test_substringAfter() {
+        String str = "key=value";
+        Assertions.assertEquals("value", StringUtils.substringAfter(str, "="));
+        Assertions.assertNull(StringUtils.substringAfter(null, "="));
+    }
+
+    @Test
+    public void test_substringBetween() {
+        String str = "key=value";
+        Assertions.assertEquals("=", StringUtils.substringBetween(str, "y", "v"));
+        Assertions.assertNull(StringUtils.substringBetween(null, "y", "v"));
+    }
+
+    @Test
     public void test_trim() {
         String str = "\n app  le \t";
         String trim = StringUtils.trim(str);
@@ -141,6 +162,14 @@ public class StringUtilsTest {
     }
 
     @Test
+    public void test_equalsAny() {
+        String str = "apple";
+        Assertions.assertTrue(StringUtils.equalsAny(str, "apple", "banana"));
+        Assertions.assertTrue(StringUtils.equalsAny(str, null, "apple"));
+        Assertions.assertFalse(StringUtils.equalsAny(str, null, "banana"));
+    }
+
+    @Test
     public void test_equalsIgnoreCase() {
         String str = "apple";
         Assertions.assertTrue(StringUtils.equalsIgnoreCase(str, "Apple"));
@@ -152,6 +181,22 @@ public class StringUtilsTest {
         String str = "14311112222";
         String overlay = StringUtils.overlay(str, "****", 3, 8);
         Assertions.assertEquals("143****222", overlay);
+    }
+
+    @Test
+    public void test_abbreviate() {
+        String str = "apple";
+        String abbreviate = StringUtils.abbreviate(str, 4);
+        Assertions.assertEquals("a...", abbreviate);
+        Assertions.assertNull(StringUtils.abbreviate(null, 4));
+    }
+
+    @Test
+    public void test_isNumeric() {
+        Assertions.assertTrue(StringUtils.isNumeric("143"));
+        Assertions.assertFalse(StringUtils.isNumeric("-143"));
+        Assertions.assertFalse(StringUtils.isNumeric("1.43"));
+        Assertions.assertFalse(StringUtils.isNumeric("143a"));
     }
 
     @Test
