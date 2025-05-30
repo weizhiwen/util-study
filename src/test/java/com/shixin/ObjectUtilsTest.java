@@ -1,6 +1,7 @@
 package com.shixin;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,18 @@ public class ObjectUtilsTest {
     public void test_identityToString() {
         System.out.println(ObjectUtils.identityToString(1));
         Assertions.assertNull(ObjectUtils.identityToString(null));
+    }
+
+    @Test
+    public void test_clone() {
+        Integer[] a = new Integer[]{1, 2, 3};
+        Integer[] clone = ObjectUtils.clone(a);
+        Assertions.assertNotSame(a, clone);
+        Assertions.assertArrayEquals(a, clone);
+
+        // 不可clone对象返回null
+        Pair<Long, Long> pair = Pair.of(2L, 3L);
+        Pair<Long, Long> pairClone = ObjectUtils.clone(pair);
+        Assertions.assertNull(pairClone);
     }
 }
