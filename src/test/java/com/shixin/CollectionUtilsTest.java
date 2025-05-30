@@ -38,6 +38,13 @@ public class CollectionUtilsTest {
     }
 
     @Test
+    public void test_collate() {
+        List<Integer> a = List.of(10, 2, 3);
+        List<Integer> b = List.of(1, 2, 4);
+        Assertions.assertEquals(List.of(1, 2, 4, 10, 2, 3), CollectionUtils.collate(a, b));
+    }
+
+    @Test
     public void test_subtract() {
         List<Integer> a = List.of(1, 2, 3);
         List<Integer> b = List.of(1, 2, 4);
